@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 const mysql = require("mysql2");
+const cors = require("cors");
 
 const app = express();
 const con = mysql.createConnection({
@@ -43,3 +44,40 @@ app.get("/getuser/:id", bodyparser.json(), function (req, res) {
 app.listen(8000, console.log("listening 8000"));
 
 
+/**********************************email and nodemailer***************************** */
+const nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'kennedymarvellous001@gmail.com',
+      pass: 'zceb znrq ajzh wszq'
+    }
+  });
+  
+  var mailOptions = (from,to,subject,body,)
+
+    
+  
+  app.post('/send-email', (req, res) => {
+    const { to, subject, body, recieveremailadress,fullname } = req.body;
+    if (err) throw err
+    res.send(result);
+  })
+  
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+  
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+   console.log(`Server running on port ${port}`);
+  });
+  
+  
+  
+  

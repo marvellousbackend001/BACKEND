@@ -23,3 +23,7 @@ content-type: application/json
 
 ###
 GET http://localhost:/getuser/id
+
+
+###
+POST http://localhost:8000/send-email
