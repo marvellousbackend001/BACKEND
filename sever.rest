@@ -1,4 +1,25 @@
-POST  http://localhost:8000/signup
+
+
+POST http://localhost:8000/signup
 Content-Type: application/json
 
-{"test":"test"}
+{
+    "firstname":"kennedy", 
+    "lastname":"marvellous", 
+    "email":"kennedymarvellous001@gmail.com", 
+    "gender":"male", 
+    "pass":"word1234"
+}
+
+
+###
+GET http://localhost:8000/login
+content-type: application/json
+
+{
+    "email":"kennedymarvellous001@gmail.com",
+    "pass":"word1234"
+}
+
+###
+GET http://localhost:/getuser/1

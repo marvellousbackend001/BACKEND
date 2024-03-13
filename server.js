@@ -12,14 +12,30 @@ const con = mysql.createConnection({
 });
 
 app.post("/signup", bodyparser.json(), function (req, res) {
-    var sql =`INSERT INTO users(fistname,lastname,email,gender,pass)
-    VALUES('john','priase','praisemarvelous@gmail.com','male',1234)`
+    var sql = `INSERT INTO users(firstname,lastname,email,gender,pass)
+    VALUES('${req.body.firstname}','${req.body.lastname}','${req.body.email}','${req.body.gender}','${req.body.pass}')`;
     con.query(sql, function (err, result) {
         if (err) throw err
         res.send(result);
     });
 });
-  
+
+app.get("/login", bodyparser.json(), function (req, res) {
+    var sql = `SELECT * FROM users 
+    WHERE email ='${req.body.email}' AND pass ='${req.body.pass}' `
+    con.query(sql, function (err, result) {
+        if (err) throw err
+        res.send(result);
+    });
+});
+app.get("/getuser/:id", bodyparser.json(), function (req, res) {
+    var sql =`SELECT *FROM users
+    WHERE email ='${req.params.id}'`
+    con.query(sql, function (err, result) {
+        if (err) throw err
+        res.send(result);
+    });
+});
 app.listen(8000, console.log("listening 8000"));
 
 
