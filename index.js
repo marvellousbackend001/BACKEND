@@ -3,23 +3,7 @@ const nodemailer = require('nodemailer');
 const mysql = require('mysql2');
 
 const app = express();
-
-
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST || 'localhost',
-  port: process.env.DB_PORT || 3306,
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || 'CHIDERA001?.1',
-  database: process.env.DB_NAME || 'test2'
- });
-
- connection.connect(error => {
-  if (error) {
-     console.error('Error connecting to the database:', error);
-     return;
-  }
-  console.log('Connected to the database');
- });
+ 
 
 
 var transporter = nodemailer.createTransport({
@@ -43,6 +27,10 @@ transporter.sendMail(mailOptions, function (error, info) {
   } else {
     console.log('Email sent: ' + info.response);
   }
+});
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+ console.log(`Server running on port ${port}`);
 });
 
 

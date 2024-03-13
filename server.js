@@ -11,9 +11,11 @@ const con = mysql.createConnection({
     port: "3306",
 });
 
+
 /********************Endpoint********************/
 
 app.post("/signup", bodyparser.json(), function (req, res) {
+
     var sql = `INSERT INTO users(firstname,lastname,email,gender,pass)
     VALUES('${req.body.firstname}','${req.body.lastname}','${req.body.email}','${req.body.gender}','${req.body.pass}')`;
     con.query(sql, function (err, result) {
