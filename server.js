@@ -47,6 +47,10 @@ app.listen(8000, console.log("listening 8000"));
 /**********************************email and nodemailer***************************** */
 const nodemailer = require('nodemailer');
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }
+));
+
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -63,10 +67,10 @@ app.post('/send-email', function (req, res) {
     to,
     subject,
     body
- };
+  };
 
   transporter.sendMail(mailOptions, function (error, info) {
-   
+
     if (error) {
       console.log(error);
     } else {
