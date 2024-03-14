@@ -27,3 +27,11 @@ GET http://localhost:/getuser/id
 
 ###
 POST http://localhost:8000/send-email
+content-type: application/json
+
+{
+    "from":"kennedymarvellous001@gmail.com",
+    "to":"dloveade@gmail.com",
+    "subject":"testing",
+    "body":"email sent successfully"
+}
