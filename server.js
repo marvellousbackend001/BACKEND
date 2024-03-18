@@ -1,9 +1,11 @@
+
 const express = require("express");
 const bodyparser = require("body-parser");
 const mysql = require("mysql2");
 const cors = require("cors");
 
 const app = express();
+/****************connecting to  mysql************************* */
 const con = mysql.createConnection({
   host: "127.0.0.1",
   user: "root",
@@ -46,9 +48,9 @@ app.listen(8000, console.log("listening 8000"));
 
 /**********************************email and nodemailer***************************** */
 const nodemailer = require('nodemailer');
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }
+app.use(express.urlencoded({
+  extended: true
+}
 ));
 
 var transporter = nodemailer.createTransport({
@@ -59,14 +61,15 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-app.post('/send-email', function (req, res) {
-  const { from, to, subject, body } = req.body;
+app.post('/send-email', bodyparser.json(), function (req, res) {
+  const { from, to, subject, body, replyTo } = req.body
 
   var mailOptions = {
     from,
     to,
     subject,
-    body
+    text:body,
+    replyTo
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
@@ -81,7 +84,5 @@ app.post('/send-email', function (req, res) {
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
-});
-
-
+})
 
