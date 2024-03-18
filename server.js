@@ -62,13 +62,13 @@ var transporter = nodemailer.createTransport({
 });
 
 app.post('/send-email', bodyparser.json(), function (req, res) {
-  const { from, to, subject, body, replyTo } = req.body
+  const { from, to, subject, text, replyTo } = req.body
 
   var mailOptions = {
     from,
     to,
     subject,
-    text:body,
+    text,
     replyTo
   };
 
